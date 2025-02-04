@@ -13,10 +13,10 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
     if (err) {
-      console.error('Error connecting to the database: ', err);
+      console.error('Error connecting to the database: ', err)
       return;
     }
-    console.log('Connected to the database');
+    console.log('Connected to the database')
     // based on norbert's schema 
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS books (
@@ -26,15 +26,15 @@ db.connect((err) => {
         cover VARCHAR(255),
         price DECIMAL(10, 2) NOT NULL
       )
-    `;
+    `
   
     db.query(createTableQuery, (err, result) => {
       if (err) {
-        console.error('Error creating table: ', err);
-        return;
+        console.error('Error creating table: ', err)
+        return
       }
-    });
-  });
+    })
+  })
   
 
 app.use(express.json())//return json data using the api server postman
