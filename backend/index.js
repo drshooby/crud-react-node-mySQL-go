@@ -1,8 +1,8 @@
-import express  from "express";
+import express  from "express"
 import mysql from "mysql2"
 import cors from "cors"
 
-const app = express();
+const app = express()
 
 const db = mysql.createConnection({
     host: "mysql",
@@ -13,10 +13,10 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
     if (err) {
-      console.error('Error connecting to the database: ', err)
-      return;
+      console.error("Error connecting to the database: ", err)
+      return
     }
-    console.log('Connected to the database')
+    console.log("Connected to the database")
     // based on norbert's schema 
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS books (
@@ -30,7 +30,7 @@ db.connect((err) => {
   
     db.query(createTableQuery, (err, result) => {
       if (err) {
-        console.error('Error creating table: ', err)
+        console.error("Error creating table: ", err)
         return
       }
     })
