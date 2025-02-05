@@ -10,10 +10,11 @@ services:
         condition: service_healthy
 
   mysql:
-    image: mysql:latest
+    image: mysql:8.0
     environment:
       - MYSQL_DATABASE=test
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
     healthcheck:
