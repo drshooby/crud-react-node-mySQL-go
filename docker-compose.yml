@@ -13,7 +13,7 @@ services:
     image: mysql:latest
     environment:
       - MYSQL_DATABASE=test
-      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
       - "3306:3306"
     healthcheck:
