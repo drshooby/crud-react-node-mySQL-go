@@ -9,33 +9,7 @@ const db = mysql.createConnection({
     user: "root",
     password: "",
     database: "test"
-});
-
-db.connect((err) => {
-    if (err) {
-      console.error("Error connecting to the database: ", err)
-      return
-    }
-    console.log("Connected to the database")
-    // based on norbert's schema 
-    const createTableQuery = `
-      CREATE TABLE IF NOT EXISTS books (
-        id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-        title VARCHAR(255) NOT NULL,
-        description TEXT NOT NULL,
-        cover VARCHAR(255),
-        price DECIMAL(10, 2) NOT NULL
-      )
-    `
-  
-    db.query(createTableQuery, (err, result) => {
-      if (err) {
-        console.error("Error creating table: ", err)
-        return
-      }
-    })
-  })
-  
+})
 
 app.use(express.json())//return json data using the api server postman
 
@@ -46,24 +20,13 @@ app.get("/", (req,res)=>{
 })
 
 //postman -> get method  http://localhost:8800/books
-app.get("/books", (req, res) => {
+app.get("/books", (req,res)=>{
     const query = "SELECT * FROM books"
-    db.query(query, (err, data) => {
-      if (err) {
-        console.error("Error executing query:", err)
-        return res.status(500).json({ error: err.message })
-      }
-  
-      console.log("Books data from DB:", data);
-  
-      if (!data || data.length === 0) {
-        console.log("No books found in the database.")
-        return res.json([])
-      }
-  
-      return res.json(data)
-    });
-  });
+    db.query(query, (err,data)=>{
+          if(err) return res.json(err)
+          return res.json(data)
+    })
+  })
 
 
   //postman ---> post method
